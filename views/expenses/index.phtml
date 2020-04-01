@@ -1,0 +1,40 @@
+<?php require VIEWS_PATH . 'includes/header.phtml';?>
+<div class="container">
+    <div class="col-md-12">
+        <h1>Suas despesas</h1>    
+        <hr>
+    </div>
+    <div class="col-md-12">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Criado em</th>
+                <th></th>
+            </tr>
+            <tbody>
+            <?php foreach($this->expenses as $expense) : ?>
+                <tr>
+                    <td><?=$expense['id']?></td>
+                    <td><?=$expense['description']?></td>
+                    <td><?='R$ '. number_format($expense['value'], 2, ',', '.')?></td>
+                    <td><?=date('d/m/Y H:i:s', strtotime($expense['created_at']))?></td>
+                    <td>
+                        <a href="<?=HOME?>/myexpenses/edit/<?=$expense['id']?>" class="btn btn-default">
+                            Editar
+                        </a>
+                        <a href="<?=HOME?>/myexpenses/remove/<?=$expense['id']?>" class="btn btn-danger">
+                            Excluir
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </thead>
+    </table>
+
+    </div>
+</div>
+<?php require VIEWS_PATH . 'includes/footer.phtml';?>
